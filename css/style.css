@@ -1,5 +1,7 @@
 /* 1. Use a more-intuitive box-sizing model */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -23,18 +25,31 @@ body {
 }
 
 /* 6. Improve media defaults */
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-width: 100%;
 }
 
 /* 7. Inherit fonts for form controls */
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   font: inherit;
 }
 
 /* 8. Avoid text overflows */
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   overflow-wrap: break-word;
 }
 
@@ -42,18 +57,35 @@ p, h1, h2, h3, h4, h5, h6 {
 p {
   text-wrap: pretty;
 }
-h1, h2, h3, h4, h5, h6 {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   text-wrap: balance;
 }
 
 /*
   10. Create a root stacking context
 */
-#root, #__next {
+#root,
+#__next {
   isolation: isolate;
 }
 
 /* Style starts here... */
+:root {
+  --font-ui: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  --color-surface: #f9fafb;
+  --color-text: #000000;
+  --color-text-muted: rgb(54, 56, 57);
+  --color-accent: #596d48;
+  --color-border: #e5e7eb;
+}
+
 @font-face {
   font-family: nordic;
   src: url(../assets/Norsebold.otf);
@@ -67,32 +99,33 @@ body {
   border: 2px solid black;
 }
 
+/* Layout */
 .left {
-  flex-grow: 1;
-  background-image: url(../assets/bg-img.jpg);
-  background-color: azure; /* fallback color */
-  background-repeat: no-repeat; /* don't tile */
-  background-size: cover;
-  background-position: center;
-  /* background-attachment: fixed; */
   display: flex;
   flex-direction: column;
+  flex-basis: 35vw;
+  background-color: azure; /* fallback color */
+  background-image: url(../assets/bg-img.jpg);
+  background-position: center;
+  background-repeat: no-repeat; /* don't tile */
+  background-size: cover;
+  /* background-attachment: fixed; */
 }
 
 .right {
-  border: 2px solid green;
-  flex-grow: 4;
-  background-color: aquamarine;
+  flex-basis: 65vw;
+  background-color: var(--color-surface);
 }
 
+/* Left section */
 .logo-grp {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 1rem;
   display: flex;
   justify-content: center;
   gap: 1rem;
   margin-top: 35%;
   margin-bottom: auto;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .logo {
@@ -102,22 +135,136 @@ body {
 }
 
 .logo-txt {
-  font-family: nordic, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: nordic, var(--font-ui);
   color: white;
   font-size: 6rem;
 }
 
 p {
-  color: white;
-  text-align: center;
   margin-top: auto;
   margin-bottom: 2%;
+  color: white;
+  text-align: center;
   font-size: 1.2rem;
   font-weight: 700;
 }
 
 a {
-  /* text-decoration: none; */
   color: white;
+  /* text-decoration: none; */
+}
+
+/* Right section */
+.top {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 50px;
+  color: var(--color-text);
+  font-family: var(--font-ui);
+  font-size: 1.2rem;
+}
+
+.top h3.title {
+  max-width: 65%;
+  margin-top: 150px;
+}
+
+span {
+  font-style: italic;
+  font-weight: 600;
+}
+
+.middle {
+  color: var(--color-text-muted);
+  font-family: var(--font-ui);
+}
+
+/* Form */
+fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 3rem;
+  border: none;
+  background-color: white;
+  box-shadow: 0 0.5rem 15px rgba(0, 0, 0, 0.6);
+}
+
+fieldset h3 {
+  font-size: 1.5rem;
+}
+
+fieldset > div {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 30%;
+}
+
+fieldset > div > div {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+input {
+  width: 15rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.2rem;
+}
+
+input:valid {
+  border: 2px solid green;
+}
+
+input:invalid {
+  border-color: red;
+}
+
+input:focus {
+  box-shadow: 0.05rem 0.05rem 15px rgba(0, 0, 0, 0.4);
+}
+
+button {
+  padding: 0.8rem 3rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--color-accent);
+  color: white;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 800;
+  box-shadow: 0.1rem 0.1rem 10px rgba(0, 0, 0, 0.6);
+}
+
+button:hover {
+    opacity: 0.95;
+}
+
+div.reg {
+  padding: 3rem;
+}
+
+p.log-in {
+    color: var(--color-text);
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+p.log-in a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+p.log-in a:hover {
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.2);;
 }
 
